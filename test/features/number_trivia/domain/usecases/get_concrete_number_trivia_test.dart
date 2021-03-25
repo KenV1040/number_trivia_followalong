@@ -35,6 +35,7 @@ void main() {
 
       // assert
       expect(result, Right(tNumberTrivia));
+      
       verify(mockNumberTriviaRepository.getConcreteNumberTrivia(tNumber));
       // Ensures the tNumber variable was passed and not some hard coded number.
       verifyNoMoreInteractions(mockNumberTriviaRepository);
