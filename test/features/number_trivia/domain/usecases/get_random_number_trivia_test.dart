@@ -20,23 +20,22 @@ void main() {
     usecase = GetRandomNumberTrivia(mockNumberTriviaRepository);
   });
 
-  final tNumber = 1; // tNumber (or Test Number) is the number we try to get from repository
-  final tNumberTrivia = NumberTrivia(number: tNumber, text: 'test'); // NumberTrivia should be returned from the mockRepository after supplying it with a number 
+  final tNumberTrivia = NumberTrivia(number: 1, text: 'test'); // NumberTrivia should be returned from the mockRepository after supplying it with a number 
 
   test (
-    'Should get trivia for number from repository',
+    'Should get trivia from repository',
     () async {
       // arrange
       when(mockNumberTriviaRepository.getRandomNumberTrivia())
       .thenAnswer((_) async =>  Right(tNumberTrivia));
       
       // act
-      final result = await usecase(Params(number: tNumber));
+      final result = await usecase(NoParams());
 
       // assert
       expect(result, Right(tNumberTrivia));
       
-      verify(mockNumberTriviaRepository.getConcreteNumberTrivia(tNumber));
+      verify(mockNumberTriviaRepository.getRandomNumberTrivia());
       // Ensures the tNumber variable was passed and not some hard coded number.
       verifyNoMoreInteractions(mockNumberTriviaRepository);
       // Ensures no more interactions is done on the repository.  
